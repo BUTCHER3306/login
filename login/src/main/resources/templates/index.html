@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+    <center>
+        <h2>用户信息</h2>
+        <table width ="600"  border ="1"  cellpadding ="0"  cellspacing ="0"  bordercolor ="#6e90bd"  bordercolordark ="#ffffff"  style ="margin:30px;" >
+            <tr>
+                <td>序号</td>
+                <td>账号</td>
+                <td>用户状态</td>
+                <td>用户名</td>
+                <td>允许登录的设备IP</td>
+                <td>权限等级</td>
+                <td>操作</td>
+            </tr>
+            <tr th:each="user:${users}" th:object="${user}">
+                <td th:text="${userStat.count}">序号</td>
+                <td th:text="*{getUserName()}">登录名</td>
+                <td th:text="${user.getStatus() == 0 ? '正常': '异常'}">用户状态</td>
+                <td th:text="${user.getRealName()}">用户名</td>
+                <td th:text="*{loginIp}">允许登录的设备IP</td>
+                <td th:text="*{permissionGrade == 0 ? '管理员' : '普通用户'}">权限等级</td>
+                <td>
+                    <a th:href="@{|/private/toUpdate?id=*{id}|}">修改</a>
+                    <a th:href="@{|/private/delete?id=*{id}|}">删除</a>
+                </td>
+            </tr>
+        </table>
+        <a th:href="@{|/private/toAdd|}"><input type="button" value="添加用户"></a>
+    </center>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kdhy.login.mapper.generate.UserMapper">
+  <resultMap id="BaseResultMap" type="com.kdhy.login.model.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="real_Name" jdbcType="VARCHAR" property="realName" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="permission_grade" jdbcType="INTEGER" property="permissionGrade" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, pass_word, status, real_Name, login_ip, permission_grade
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kdhy.login.model.User">
+    insert into t_user (id, user_name, pass_word, 
+      status, real_Name, login_ip, 
+      permission_grade)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, 
+      #{permissionGrade,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kdhy.login.model.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="passWord != null">
+        pass_word,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="realName != null">
+        real_Name,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="permissionGrade != null">
+        permission_grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionGrade != null">
+        #{permissionGrade,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kdhy.login.model.User">
+    update t_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        pass_word = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null">
+        real_Name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionGrade != null">
+        permission_grade = #{permissionGrade,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kdhy.login.model.User">
+    update t_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      pass_word = #{passWord,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      real_Name = #{realName,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      permission_grade = #{permissionGrade,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
